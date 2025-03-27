@@ -3,7 +3,7 @@ import numpy as np
 from flask import Flask, request, jsonify, render_template
 
 # Load the trained model
-model = joblib.load("random_forest_model.pkl")
+model = joblib.load("model.pkl")
 
 app = Flask(__name__)
 
