@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop price prediction</title>
+    <style>
+    .container {
+        display: flex;
+        gap: 100px;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .commodity {
+        width: 150px;
+        background: #fff;
+        padding: 20px;
+        text-align: right;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-wrap: wrap; 
+        align-items: center; 
+        gap: 10px;
+    }
+    
+    #commodity4{
+       
+        display: flex;
+        justify-content: flex-end; 
+        text-align: center;
+    }
+    
+    .commodity img {
+        width: 40px; /* Small image size */
+        height: 40px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+    
+    #commodity4 img {
+        width: 50px; 
+        height: 50px;
+        top: 107px;
+        right :310px;
+        object-fit: cover;
+        border-radius: 5px;
+        position: absolute;
+        transform: translateY(-50%); }
+    
+     .commodity:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+    
+    
+    <body>
+        <h5>Top 10 Commodities</h5>
+        
+        <div class="container">
+            <a href="{{ url_for('apple') }}">
+                <div class="commodity">
+                <img src="https://s3-ap-southeast-2.amazonaws.com/producemarkets.live/product-varieties/1234/Missile-Mini-Apple-5EAD173C2969F.jpg" alt="Apple">
+                <b>Apples</b></h4>          
+            </div>
+        </a>
+
+        
+    
+            <!-- Tomato -->
+            <a href="{{ url_for('tomato') }}">
+            <div class="commodity" id="commodity2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/330px-Tomato_je.jpg" alt="Tomato">
+                <h4><b>Tomato</b></h4>          
+            </div>
+            </a>
+            
+             <!-- Cauliflower -->
+             <a href="{{ url_for('cauliflower') }}">
+            <div class="commodity" id="commodity3">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Chou-fleur_02.jpg/330px-Chou-fleur_02.jpg" alt="Cauliflower">
+            <h4><b>Cauliflower</b></h4>  
+        </div> 
+        </a> 
+            <!-- Pear -->
+            <a href="{{ url_for('pear') }}">
+            <div class="commodity" id="commodity4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Pears.jpg/330px-Pears.jpg" alt="Pear">
+            <h4><b>Pear</b></h4>  
+        </div>
+        </a>
+    
+
+        <div class="container">
+            <!-- Potato -->
+            <a href="{{ url_for('potato') }}">
+            <div class="commodity" id="commodity5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Potato-800x800.jpg" alt="Potato">
+                <h4><b>Potato</b></h4>          
+            </div>
+            </a>
+    
+            <!-- Peas Wet -->
+            <a href="{{ url_for('peas') }}">
+            <div class="commodity" id="commodity6">
+                <img src="https://www.cookingwithamc.info/sites/default/files/styles/max_width_1000/public/migrate/ingredient-wiki/1524655020-amc-wiki-id4109-image26.png?itok=brfqDpmO" alt="Peas Wet">
+                <h4><b>Peas</b></h4>          
+            </div>
+            </a>
+            
+             <!-- Banana-->
+             <a href="{{ url_for('banana') }}">
+            <div class="commodity" id="commodity7">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Cavendish_Banana_DS.jpg/330px-Cavendish_Banana_DS.jpg" alt="Banana">
+            <h4><b>Banana</b></h4>  
+        </div> 
+             </a>  
+            <!-- Cabbage -->
+            <a href="{{ url_for('cabbage') }}">
+            <div class="commodity" id="commodity8">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlOCOEwcCv1yXY1e5vK4yY_8ID4ujDX087uw&s" alt="Cabbage">
+            <h4><b>Cabbage</b></h4>  
+        </div>
+            </a>
+
+        <div class="container">
+            <!-- Onion-->
+            <a href="{{ url_for('onion') }}">
+            <div class="commodity" id="commodity9">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Onion_on_White.JPG/330px-Onion_on_White.JPG" alt="Onion">
+                <h4><b>Onion</b></h4>          
+            </div>
+            </a>
+    
+            <!-- Cucumber -->
+            <a href="{{ url_for('cucumbar') }}">
+            <div class="commodity" id="commodity10">
+                <img src="http://www.plantgrower.org/uploads/6/5/5/4/65545169/published/cucumber-slices.jpg?1516496438" alt="Cucumbar">
+                <h4><b>Cucumbar</b></h4>          
+            </div>
+            </a>
+        </div>
+        
+    </body>
+    
+
+    
+
+</html>

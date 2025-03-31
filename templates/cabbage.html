@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabbage Prices</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            display: flex-start;
+            justify-content: flex-start;
+            margin-top: 20px;
+        }
+
+        .price-box {
+            padding: 15px 30px;
+            border: 2px solid #000;
+            background-color: #fff;
+            font-size: 18px;
+            margin: 10px;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        canvas {
+            width: 400px ;
+            height: 400px ;
+        }
+        
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Cabbage Price Information</h2>
+    <img src="https://farm3.staticflickr.com/2327/2302667023_7ca5dd2870.jpg" alt="cauliflower1">
+    <div class="price-box">
+        <strong>Min Price:</strong> {{ min_price }} Rs/Quintal
+    </div>
+
+    <div class="price-box">
+        <strong>Max Price:</strong>{{ max_price }} Rs/Quintal
+    </div>
+    <div class="chart-container">
+        <div>
+            <h2>Cabbage Variety Distribution</h2>
+            <canvas id="pieChart"></canvas>
+        </div>
+        <div>
+            <h2> Market Locations</h2>
+            <canvas id="scatterChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Fetch Pie Chart Data
+        fetch('/get_pie_data7')
+        .then(response => response.json())
+        .then(data => {
+            let ctx = document.getElementById('pieChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Variety Distribution',
+                        data: data.values,
+                        backgroundColor: ['red', 'blue', 'green', 'orange', 'purple','yellow','coral']
+                    }]
+                }
+            });
+        });
+          
+        // Fetch Scatter Plot Data
+        fetch('/get_scatter_data')
+        .then(response => response.json())
+        .then(data => {
+            let scatterData = [];
+            for (let i = 0; i < data.labels.length; i++) {
+                scatterData.push({ x: data.longitudes[i], y: data.latitudes[i] });
+            }
+
+            let ctx = document.getElementById('scatterChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Market Locations',
+                        data: scatterData,
+                        backgroundColor: 'blue'
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { title: { display: true, text: 'Longitude' } },
+                        y: { title: { display: true, text: 'Latitude' } }
+                    }
+                }
+            });
+        });
+        </script>
+
+</body>
+</html>

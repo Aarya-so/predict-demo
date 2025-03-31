@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crop Price Prediction</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>Top 5 Commodities by Arrivals</h2>
+    <label for="cars">Select district:</label>
+
+<select name="district" id="district" onchange="jsFunction(this.value);">
+  <option value="Kinnaur">Kinnaur</option>
+  <option value="Bilaspur">Bilaspur</option>
+  <option value="Chamba">Chamba</option>
+  <option value="Hamirpur">Hamirpur</option>
+</select>
+<div id="demo"></div>
+    <canvas id="cropPieChart"></canvas>
+
+    <script type="text/javascript" src="/static/js/chartgo.js"></script>
+
+</body>
+</html>

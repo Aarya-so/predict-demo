@@ -1,28 +1,47 @@
-import joblib
-import numpy as np
-from flask import Flask, request, jsonify, render_template
-
-# Load the trained model
-model = joblib.load("model.pkl")
+from flask import Flask, render_template, jsonify, request
+import psycopg2
 
 app = Flask(__name__)
 
+# Connect to PostgreSQL Database
+conn = psycopg2.connect(
+    dbname="mydb",
+    user="postgres",
+    password="ap@calculas",
+    host="localhost",
+    port="5432"
+)
+cursor = conn.cursor()
+
+# 🏠 Route to render index.html
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html')  # ✅ Now serves the frontend
 
-@app.route('/predict', methods=['POST'])
-def predict():
+# 📊 API Route for Pie Chart Data
+@app.route('/get_pie_data', methods=['GET'])
+def get_pie_data():
     try:
-        # Extract data from form
-        features = [float(x) for x in request.form.values()]
-        final_features = np.array(features).reshape(1, -1)
+        district = request.args.get("district", "Kinnaur")  # Default to Pune
+        query = """
+            SELECT commodity, SUM(arrivals_tonnes) AS total_arrivals
+            FROM commodity_data
+            WHERE district_name = %s
+            GROUP BY commodity
+            ORDER BY total_arrivals DESC
+            LIMIT 5;
+        """
+        cursor.execute(query, (district,))
+        data = cursor.fetchall()
 
-        # Make prediction
-        prediction = model.predict(final_features)
-        output = round(prediction[0], 2)
-
-        return render_template('index.html', prediction_text=f'Predicted Price: ₹{output}')
+        # Convert query result to JSON format
+        response = {
+            "labels": [row[0] for row in data],
+            "values": [row[1] for row in data]
+        }
+        
+        return jsonify(response)
+    
     except Exception as e:
         return jsonify({"error": str(e)})
 
